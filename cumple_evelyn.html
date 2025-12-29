@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Times New Roman", serif;
+  background: #050509;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* =====================
+   PANTALLAS
+===================== */
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =====================
+   ESTRELLAS
+===================== */
+.stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.8), transparent),
+    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.6), transparent),
+    radial-gradient(2px 2px at 50% 40%, rgba(255,255,255,.9), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.7), transparent),
+    radial-gradient(2px 2px at 90% 30%, rgba(255,255,255,.8), transparent);
+  background-size: 300px 300px;
+  animation: starsMove 90s linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes starsMove {
+  from { background-position: 0 0; }
+  to   { background-position: 0 1200px; }
+}
+
+#menu {
+  background: url("images/golden_hour.png") center bottom / cover no-repeat;
+  animation: slowPan 140s linear infinite;
+}
+
+@keyframes slowPan {
+  0%   { background-position: center bottom; }
+  50%  { background-position: left bottom; }
+  100% { background-position: center bottom; }
+}
+
+/* =====================
+   REGALOS (CON EFECTOS)
+===================== */
+.gifts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.gift {
+  width: 180px;
+  max-width: 45vw;
+  cursor: pointer;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  animation: float 4s ease-in-out infinite, glow 3s infinite alternate;
+  filter: drop-shadow(0 0 25px rgba(255,215,150,0.7));
+}
+
+/* Efecto al pasar el mouse (PC) y al tocar (Celular) */
+.gift:hover, .gift:active {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 55px rgba(255, 230, 180, 1)) brightness(1.1);
+}
+
+@media (max-width: 600px) {
+  .gifts { flex-direction: column; gap: 40px; }
+  .gift { width: 140px; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 20px rgba(255,200,120,.6)); }
+  to   { filter: drop-shadow(0 0 45px rgba(255,230,170,1)); }
+}
+
+/* =====================
+   IMÁGENES DE CONTENIDO
+===================== */
+img.display {
+  max-width: 90%;
+  width: 360px;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 14px;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 20px rgba(255,215,150,.6));
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+/* Efecto en las fotos de Evelyn al tocarlas o pasar mouse */
+img.display:hover, img.display:active {
+  transform: scale(1.05);
+  opacity: 1;
+  filter: drop-shadow(0 0 50px rgba(255, 230, 180, 1)) brightness(1.08);
+}
+
+/* =====================
+   TEXTO Y BOTONES
+===================== */
+.text {
+  max-width: 90%;
+  width: 700px;
+  font-size: 1.3rem;
+  line-height: 1.7;
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 14px;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .text { font-size: 1.1rem; padding: 20px; }
+}
+
+button {
+  margin: 30px 0;
+  padding: 14px 36px;
+  font-size: 18px;
+  font-family: inherit;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:active { background: rgba(255,255,255,0.3); }
+
+</style>
+</head>
+<body>
+
+<div id="menu" class="screen active">
+  <div class="stars"></div>
+  <div class="gifts">
+    <img src="images/gift_gold.png" class="gift" onclick="openGift(1)">
+    <img src="images/gift_gold.png" class="gift" onclick="openGift(2)">
+    <img src="images/gift_gold.png" class="gift" onclick="openGift(3)">
+  </div>
+</div>
+
+<div id="gift1" class="screen">
+  <div class="stars"></div>
+  <img src="images/lana.png" class="display">
+  <div class="text">
+    <p><i>Hey Evelyn…</i></p>
+    <p>I just wanted to stop by for a moment.</p>
+    <p>To tell you something softly, the way important things are said.</p>
+    <p>Not everyone carries light the way you do.</p>
+    <p>You shine without trying.</p>
+    <p>I see strength in you — the quiet kind.</p>
+    <p>Keep being gentle.</p>
+    <p>Someone loves you very deeply.</p>
+    <p>And I’m proud of you.</p>
+    <p>— Lana</p>
+  </div>
+  <button onclick="goHome()">Volver</button>
+</div>
+
+<div id="gift2" class="screen">
+  <div class="stars"></div>
+  <img src="images/evelyn1.jpg" class="display">
+  <img src="images/evelyn2.jpg" class="display">
+  <div class="text">
+    <p>Hoy no solo cumples años, amor mío...</p>
+    <p>Hoy el cielo recuerda el día en que decidió inclinarse un poco hacia la tierra y dejar caer una de sus obras más bellas: tú.
+        Porque hay personas que no solo nacen, son enviadas, y yo sé —con una certeza que no necesita pruebas— que tú eres una de ellas.
+        
+        La Biblia dice: “Porque tú formaste mis entrañas; tú me hiciste en el vientre de mi madre… maravillosas son tus obras” (Salmos 139:13-14).
+        Y cada vez que te miro, entiendo esto de una forma nueva.
+        Eres una obra cuidada, pensada con detalle, hecha con ternura divina.
+        Tus ojos parecen guardar pedazos del cielo, y tu sonrisa… tu sonrisa es de esas que sanan sin tocar.
+        
+        Hoy celebro tu vida, pero también celebro lo que provocas en la mía.
+        Celebro tu risa que me devuelve la paz, tu voz que aquieta mis tormentas, tu presencia que convierte cualquier lugar en hogar.
+        Porque “el amor es paciente, es bondadoso… todo lo soporta” (1 Corintios 13:4-7),
+        y en ti he aprendido que el amor verdadero no grita, abraza.
+        
+        Evelyn, tú eres mi regalo inmerecido.
+        Mi recordatorio diario de que Dios todavía escribe historias hermosas.
+        “Toda buena dádiva y todo don perfecto desciende de lo alto” (Santiago 1:17),
+        y yo no tengo duda alguna de que tú descendiste directo de Sus manos.
+        
+        Que este nuevo año de vida esté lleno de luz, de sueños cumplidos, de caminos abiertos.
+        Que Dios te guarde cuando yo no pueda, que te abrace cuando no esté cerca, que te sonría en cada paso.
+        “El Señor te bendiga y te guarde; el Señor haga resplandecer su rostro sobre ti” (Números 6:24-26).
+        
+        Feliz cumpleaños, amor de mi vida.
+        Gracias por existir, por ser, por quedarte.
+        Si alguna vez dudas de tu valor, mírame…
+        porque yo te amaré como quien cuida un milagro,
+        como quien sabe que encontró, en esta vida, algo que no se reemplaza.</p>
+  </div>
+  <button onclick="goHome()">Volver</button>
+</div>
+
+<div id="gift3" class="screen">
+  <div class="stars"></div>
+  <img src="images/pixel_sunset.png" class="display">
+  <img src="images/pixel_faces.png" class="display">
+  <div class="text">
+    <p>Eres fuego en invierno, en enero brasas, mi corazon tambien arde por ti.</p>
+  </div>
+  <button onclick="goHome()">Volver</button>
+</div>
+
+<audio id="audio1" src="audio/cinnamon_girl.mp3"></audio>
+<audio id="audio2" src="audio/those_eyes.mp3"></audio>
+<audio id="audio3" src="audio/old_enough_to_understand.mp3"></audio>
+
+<script>
+function stopAllAudio() {
+  document.querySelectorAll("audio").forEach(a => {
+    a.pause();
+    a.currentTime = 0;
+  });
+}
+
+function openGift(num) {
+  stopAllAudio();
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById("gift" + num).classList.add("active");
+  
+  let playPromise = document.getElementById("audio" + num).play();
+  if (playPromise !== undefined) {
+    playPromise.catch(e => console.log("Audio esperando interacción"));
+  }
+}
+
+function goHome() {
+  stopAllAudio();
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById("menu").classList.add("active");
+}
+</script>
+
+</body>
+</html>
